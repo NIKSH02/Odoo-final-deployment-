@@ -21,7 +21,7 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import {Server as socketIo} from 'socket.io'
 import { createServer } from 'http'
-import groupchatroute from './routes/groupChat.route.js'
+import groupchatroute from './routes/groupchatroute.js'
 import locationChatSocket from './locationChatSocket.js'
 
 // Load environment variables
