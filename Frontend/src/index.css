@@ -1,0 +1,88 @@
+
+
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+/* For dark mode theming with Tailwind, use the .dark class as a parent:
+   Example: .dark .your-class { ... } or via Tailwind's dark: utility
+   See: https://tailwindcss.com/docs/dark-mode
+*/
+/* Hide the top Google Translate banner */
+/* === Hide Google Translate top bar and elements === */
+body > .goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+.goog-logo-link,
+.goog-te-gadget span,
+iframe[id^=":"] {
+  display: none !important;
+  height: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Reset layout shift caused by Translate */
+body {
+  top: 0px !important;
+  position: static !important;
+}
+
+/* Style the translate dropdown */
+#google_translate_element {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+#google_translate_element select {
+  background-color: #f3f4f6;  /* light gray */
+  color: #111827;             /* dark text */
+  padding: 6px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+#google_translate_element select:hover {
+  border-color: #6366f1; /* indigo-500 */
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+}
+
+/* Google Login Button Responsive Styling */
+.google-login-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.google-login-container > div {
+  width: 100% !important;
+  max-width: 400px;
+}
+
+.google-login-container iframe {
+  width: 100% !important;
+  min-width: 280px !important;
+  max-width: 400px !important;
+}
+
+/* Mobile specific Google button styling */
+@media (max-width: 640px) {
+  .google-login-container > div {
+    max-width: 320px;
+  }
+  
+  .google-login-container iframe {
+    max-width: 320px !important;
+  }
+}
+/* Hide Google Translate feedback popup */
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight {
+  display: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
