@@ -3,7 +3,7 @@ import {
   getMessagesByLocation,
   getRecentMessages,
   getLocationStats
-} from "../controllers/groupChat.controller.js";
+} from '../controllers/groupChat.Controller.js';
 
 const router = express.Router();
 
