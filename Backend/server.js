@@ -52,6 +52,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:5174", // add any other frontend URLs you use
+      "https://quicksport.vercel.app"
     ],
     credentials: true, // if you use cookies/sessions
     transports: ["websocket", "polling"],
