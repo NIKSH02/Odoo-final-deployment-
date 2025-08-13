@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: 'https://odoo-final-deployment.onrender.com',
   withCredentials: true, // Send cookies with requests
 });
 
