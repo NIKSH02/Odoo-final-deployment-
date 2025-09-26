@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import { scheduleBookingCleanup } from "./utils/bookingCleanup.js";
 import ApiError from "./utils/ApiError.js";
-import ApiResponse from './utils/ApiResponse.js';
+import ApiResponse from "./utils/ApiResponse.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
 import venueRoutes from "./routes/venue.js";
@@ -19,10 +19,10 @@ import mapRoutes from "./routes/map.js";
 import paymentRoutes from "./routes/payment.js";
 import cookieParser from "cookie-parser";
 import path from "path";
-import {Server as socketIo} from 'socket.io'
-import { createServer } from 'http'
-import groupchatroute from './routes/groupchatroute.js'
-import locationChatSocket from './locationChatSocket.js'
+import { Server as socketIo } from "socket.io";
+import { createServer } from "http";
+import groupchatroute from "./routes/groupchatroute.js";
+import locationChatSocket from "./locationChatSocket.js";
 
 // Load environment variables
 dotenv.config();
@@ -36,7 +36,7 @@ connectDB();
 
 const httpServer = createServer(app);
 
-// server defining 
+// server defining
 const io = new socketIo(httpServer, {
   cors: {
     origin: ["http://localhost:5173", "http://localhost:5174"],
@@ -52,7 +52,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:5174", // add any other frontend URLs you use
-      "https://quicksport.vercel.app"
+      "https://quicksport.vercel.app",
     ],
     credentials: true, // if you use cookies/sessions
     transports: ["websocket", "polling"],
@@ -71,6 +71,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// Root route handler
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "QuickSport API Server is running successfully!",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development",
+    version: "1.0.0",
+  });
+});
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -82,7 +93,7 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/location", locationRoutes);
-app.use('/api/messages', groupchatroute);
+app.use("/api/messages", groupchatroute);
 
 // Health check endpoint
 app.get("/health", (req, res) => {
@@ -157,15 +168,15 @@ process.on("unhandledRejection", (reason, promise) => {
 app.use((err, req, res, next) => {
   console.error("Error:", err); // Add this line for debugging
   const statusCode = err.statusCode || 500;
-  const message = err.message || 'Internal Server Error';
+  const message = err.message || "Internal Server Error";
   const errors = err.errors || [];
-  
+
   res.status(statusCode).json(new ApiResponse(statusCode, null, message));
 });
 // Start Server
 httpServer.listen(PORT, () => {
   console.log(`✅ Server is running on port ${PORT}`);
-  
+
   // Start booking cleanup scheduler
   scheduleBookingCleanup();
 });
