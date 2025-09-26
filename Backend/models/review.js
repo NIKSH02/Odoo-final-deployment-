@@ -72,7 +72,7 @@ const reviewSchema = new mongoose.Schema(
 // Indexes
 reviewSchema.index({ venue: 1 });
 reviewSchema.index({ user: 1 });
-reviewSchema.index({ booking: 1 });
+
 reviewSchema.index({ "rating.overall": -1 });
 reviewSchema.index({ createdAt: -1 });
 
