@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://odoo-final-deployment-faa4.onrender.com',
+  baseURL: 'https://odoo-final-deployment-faa4.onrender.com/api',
   withCredentials: true, // Send cookies with requests
 });
 
