@@ -111,7 +111,7 @@ export const useChatLogic = (user) => {
   useEffect(() => {
     if (!currentUser) return;
 
-    const serverUrl = 'https://odoo-final-deployment.onrender.com';
+    const serverUrl = 'https://odoo-final-deployment-faa4.onrender.com';
     
     socketRef.current = io(serverUrl, {
       transports: ['websocket', 'polling'],
